@@ -7,6 +7,14 @@ const Card = (article) => {
   // The text inside elements will be set using their `textContent` property (NOT `innerText`).
   // Add a listener for click events so that when a user clicks on a card, the headline of the article is logged to the console.
   //
+
+    const card = document.createElement('div');
+    const headLine = document.createElement('div');
+    const author = document.createElement('div');
+
+    
+
+
   // <div class="card">
   //   <div class="headline">{ headline }</div>
   //   <div class="author">
