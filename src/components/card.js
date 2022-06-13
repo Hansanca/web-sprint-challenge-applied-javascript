@@ -8,12 +8,36 @@ const Card = (article) => {
   // Add a listener for click events so that when a user clicks on a card, the headline of the article is logged to the console.
   //
 
-    const card = document.createElement('div');
-    const headLine = document.createElement('div');
-    const author = document.createElement('div');
 
     
 
+    const cardDiv = document.createElement('div');
+    const headline = document.createElement('div');
+    const authorPhoto = document.createElement('div');
+    const authorName = document.createElement('span');
+
+    cardDiv.classList.add('cardDiv');
+    headline.classList.add('headline');
+    authorPhoto.classList.add('authorPhoto');
+    authorName.classList.add('authorName');
+    
+
+    headline.textContent = headline;
+    authorPhoto.textContent = authorPhoto;
+    authorName.textContent = authorName;
+
+    cardDiv.appendChild(headline);
+    cardDiv.appendChild(authorPhoto);
+    cardDiv.appendChild(authorName);
+
+    cardDiv.addEventListener('click', () => {
+      cardDiv.classList.toggle(console.log('headline'))
+      
+    })
+    return Card;
+  }
+  
+  
 
   // <div class="card">
   //   <div class="headline">{ headline }</div>
@@ -25,9 +49,24 @@ const Card = (article) => {
   //   </div>
   // </div>
   //
-}
 
-const cardAppender = (selector) => {
+
+
+  const cardAppender = (selector) => {
+    console.log(document.querySelector('.cards-container'))
+    return document.querySelector(selector).appendChild(Card('headline', 'authorPhoto', 'authorName'));
+  }
+
+  // article.forEach(article => {
+  //   axios.get('http://localhost:5001/api/articles')
+  //   .then(res => {
+  //     res.data.message.forEach(Card => {
+  //       Card(headLine, authorPhoto, authorName)
+  //     })
+  //   }).catch(err => console.error(err))
+  // }
+
+
   // TASK 6
   // ---------------------
   // Implement this function that takes a css selector as its only argument.
@@ -36,6 +75,6 @@ const cardAppender = (selector) => {
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
-}
+
 
 export { Card, cardAppender }

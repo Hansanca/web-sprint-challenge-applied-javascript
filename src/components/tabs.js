@@ -7,6 +7,23 @@ const Tabs = (topics) => {
   // The tags used, the hierarchy of elements and their attributes must match the provided markup!
   // The text inside elements will be set using their `textContent` property (NOT `innerText`).
   //
+
+const tDiv = document.createElement('div');
+const javascript = document.createElement('div');
+const bootstrap = document.createElement('div');
+const technology = document.createElement('div');
+
+
+tDiv.classList.add('tsDiv');
+javascript.classList.add('javascript');
+bootstrap.classList.add('bootstrap');
+technology.classList.add('technology');
+
+
+tDiv.textContent = javascript;
+tDiv.textContent = bootstrap;
+tDiv.textContent = technology;
+
   // <div class="topics">
   //   <div class="tab">javascript</div>
   //   <div class="tab">bootstrap</div>
@@ -16,6 +33,8 @@ const Tabs = (topics) => {
 }
 
 const tabsAppender = (selector) => {
+  console.log(document.querySelector('.tabs-container'))
+  return document.querySelector(selector).appendChild(Tabs('topics'));
   // TASK 4
   // ---------------------
   // Implement this function which takes a css selector as its only argument.
