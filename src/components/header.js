@@ -27,6 +27,7 @@ const Header = (title, date, temp) => {
     headerDiv.appendChild(headerTemp);
 
     return headerDiv;
+    
   //  <div class="header">
   //    <span class="date">{ date }</span>
   //    <h1>{ title }</h1>

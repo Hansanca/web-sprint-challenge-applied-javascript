@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const Card = (article) => {
   // TASK 5
   // ---------------------
@@ -8,34 +10,41 @@ const Card = (article) => {
   // Add a listener for click events so that when a user clicks on a card, the headline of the article is logged to the console.
   //
 
+ 
+  
+  const cardDiv = document.createElement('div');
+  cardDiv.classList.add('card');
 
-    
+  const headlineDiv = document.createElement('div');
+  headlineDiv.classList.add('headline');
+  headlineDiv.textContent = article.headline
 
-    const cardDiv = document.createElement('div');
-    const headline = document.createElement('div');
-    const authorPhoto = document.createElement('div');
-    const authorName = document.createElement('span');
+  const authorDiv = document.createElement('div');
+  authorDiv.classList.add('author');
 
-    cardDiv.classList.add('cardDiv');
-    headline.classList.add('headline');
-    authorPhoto.classList.add('authorPhoto');
-    authorName.classList.add('authorName');
-    
+  const imageContainer = document.createElement('div');
+  imageContainer.classList.add('img-container');
 
-    headline.textContent = headline;
-    authorPhoto.textContent = authorPhoto;
-    authorName.textContent = authorName;
+  const imageItself = document.createElement('img');
+  imageItself.src = article.authorPhoto;
 
-    cardDiv.appendChild(headline);
-    cardDiv.appendChild(authorPhoto);
-    cardDiv.appendChild(authorName);
+  const authorNameSpan = document.createElement('span');
+  authorNameSpan.textContent = `By ${article.authorName}`
 
-    cardDiv.addEventListener('click', () => {
-      cardDiv.classList.toggle(console.log('headline'))
-      
-    })
-    return Card;
-  }
+  imageContainer.appendChild(imageItself);
+  authorDiv.appendChild(imageContainer);
+
+  authorDiv.appendChild(authorNameSpan);
+
+  cardDiv.appendChild(headlineDiv);
+  cardDiv.appendChild(authorDiv);
+
+  cardDiv.addEventListener('click', () => {
+    console.log(article.headline);
+  });
+
+  return cardDiv;
+}
   
   
 
@@ -53,18 +62,20 @@ const Card = (article) => {
 
 
   const cardAppender = (selector) => {
-    console.log(document.querySelector('.cards-container'))
-    return document.querySelector(selector).appendChild(Card('headline', 'authorPhoto', 'authorName'));
+    // console.log(document.querySelector('.cards-container'))
+    // return document.querySelector(selector).appendChild(Card('headline', 'authorPhoto', 'authorName'));
+    axios.get('http://localhost:5001/api/articles')
+      .then(res => {
+        // console.log(res.data.articles);
+        for (let x in res.data.articles) {
+          res.data.articles[x].forEach(article => {
+            document.querySelector(selector).appendChild(Card(article))
+          })
+        }
+      })
   }
 
-  // article.forEach(article => {
-  //   axios.get('http://localhost:5001/api/articles')
-  //   .then(res => {
-  //     res.data.message.forEach(Card => {
-  //       Card(headLine, authorPhoto, authorName)
-  //     })
-  //   }).catch(err => console.error(err))
-  // }
+
 
 
   // TASK 6
