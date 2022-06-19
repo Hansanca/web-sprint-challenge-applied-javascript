@@ -1,4 +1,5 @@
 import axios from 'axios'; 
+import { Card } from './card';
 
 const topicsArray=["javascript","bootstrap","technology"];
 
@@ -12,7 +13,6 @@ const Tabs = (topics) => {
   // The text inside elements will be set using their `textContent` property (NOT `innerText`).
   //
 
-
     const topicsWrapper = document.createElement('div');
 
     topics.forEach((linkText => {
@@ -25,9 +25,6 @@ const Tabs = (topics) => {
 
     return topicsWrapper;
 
-
-
-
   // <div class="topics">
   //   <div class="tab">javascript</div>
   //   <div class="tab">bootstrap</div>
@@ -36,20 +33,24 @@ const Tabs = (topics) => {
   //
 }
 
-
-
 const tabsAppender = (selector) => {
-
   axios.get('http://localhost:5001/api/topics')
   .then(res => {
-    document.querySelector(selector).appendChild(Tabs(topics));
-  })
+    console.log(res);
+    for(let x in res.data){
+      console.log(x);
+      console.log(res.data[x]);
+      return document.querySelector(selector).appendChild(Tabs(res.data[x]))
+    }
+    }
+    
 
-}
+  
+)} 
   
 
   // TASK 4
-  
+
   // ---------------------
   // Implement this function which takes a css selector as its only argument.
   // It should obtain topics from this endpoint: `http://localhost:5001/api/topics` (test it with a console.log!).
